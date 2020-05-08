@@ -667,6 +667,20 @@ void func(std::vector<int> &&v);
 
 ---
 
+# Now we have the "Rule of 5"
+
+Update of the rule of 3
+
+If you add move constructors or assignment operators, you likely need to consider all 5 methods
+- Copy constructor
+- Copy assignment operator
+- Destructor
+- Move constructor
+- Move assignment
+
+
+---
+
 # Return Value Optimization (RVO)
 
 C++ automatically uses move when returning a value:
