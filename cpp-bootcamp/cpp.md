@@ -137,7 +137,7 @@ int myfunc() {
 
 # Use of ```auto```
 
-The ```auto``` keyaword can make code simpler.
+The ```auto``` keyword can make code simpler.
 
 It can also make it more confusing 
 
