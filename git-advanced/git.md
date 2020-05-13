@@ -611,17 +611,46 @@ $
         email = dboutcher@ocient.com
 ```
 
+---
 
+# git gc
 
+Garbage collects
 
+- this is the lie from a few slides ago
 
+Periodically git find all objects in its tree that are now unreferenced
 
+- no branch or tag points to them
 
+Deletes orphaned objects
 
+You can force this with ```git gc```
 
+- ```git gc``` also packs objects into a more compact format
+- better for moving across the network
 
+---
 
+# git gc
 
+```console
+$ git gc
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (8/8), done.
+Total 8 (delta 0), reused 0 (delta 0), pack-reused 0
 
-
-
+$ $ tree .git/objects/
+.git/objects/
+├── db
+│   └── 705edcb3c59a8eee030a36be048c28f767402f
+├── info
+│   ├── commit-graph
+│   └── packs
+└── pack
+    ├── pack-975ec03bc7312bb77159f780fdb99e3f4b56ecb5.idx
+    └── pack-975ec03bc7312bb77159f780fdb99e3f4b56ecb5.pack
+```
