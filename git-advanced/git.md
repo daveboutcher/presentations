@@ -17,6 +17,12 @@ style: |
 <!-- footer: 'advanced git' -->
 <!-- paginate: true -->
 
+# Deep git presentation
+
+![center](dilbert.png)
+
+---
+
 # what is git
 
 - Distributed revision control system with an emphasis on being fast
