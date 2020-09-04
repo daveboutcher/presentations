@@ -99,6 +99,8 @@ First version
 
 ***RTFM***
 
+***Note:*** You can customize your editor using ```git config```
+
 ---
 
 # Results of the first commit
@@ -108,19 +110,20 @@ First version
 [master (root-commit) 8102793] First version
  1 file changed, 7 insertions(+)
  create mode 100644 src/main.cpp
-(master)$ 
+(master)$
 ```
 
 ---
 
 # GUI vs command line
 
-In this talk I will primarily be using the command line
+In this talk I will be using the command line
 
-There are GUI tools available for GIT
+There are GUI tools available for GIT like VSCode
 
 - Not as widely used as the command line
 - Generally can’t do everything the command line can
+- Someone else can do the VSCode GitLens talk
 
 ---
 
@@ -211,24 +214,6 @@ DESCRIPTION
 
 ---
 
-# COMMIT_EDITMSG
-
-```plain
-First version
-# Please enter the commit message for your changes. Lines starting
-# with '#' will be ignored, and an empty message aborts the commit.
-#
-# On branch master
-#
-# Initial commit
-#
-# Changes to be committed:
-#       new file:   src/main.cpp
-#
-```
-
----
-
 # config
 
 everything you specify with "git config" goes in this file
@@ -242,16 +227,6 @@ also includes remote repos (more later...)
         bare = false
         logallrefupdates = true
 ```
-
----
-
-# description
-
-```plain
-Unnamed repository; edit this file 'description' to name the repository.
-```
-
-Only used by gitweb and email hooks
 
 ---
 
@@ -275,21 +250,6 @@ ref: refs/heads/master
 (master)$ git branch
 * master
 (master)$
-```
-
----
-
-# Digging deeper into the contents of HEAD
-
-From man gitglossary"
-
-```man
-symref
-      Symbolic reference: instead of containing the SHA-1 id itself, it is of
-      the format ref: refs/some/thing and when referenced, it recursively
-      dereferences to this reference.  HEAD is a prime example of a symref.
-      Symbolic references are manipulated with the git-symbolic-ref(1)
-      command.
 ```
 
 ---
@@ -326,7 +286,8 @@ A 160 bit SHA-1 hash that uniquely identifies a commit, its contents and its par
 
 Cryptographically strong!
 
-- originally developed to guarantee people couldn't slip malicious code into the Linux kernel
+- Originally developed so people couldn't slip malicious code into the Linux kernel
+- Moving to SHA-256
 
 ---
 
@@ -434,9 +395,46 @@ You cannot change anything in the middle without changing everything downstream
 
 ---
 
-# git diff is super clever
+# git diff
 
-It knows the SHA of the ```src``` directory hasn't changed, so it doesn't have to consider it
+git **doesn't** store diffs. It always stores the actual objects
+
+It can be clever:
+
+- knows the SHA of a directory hasn't changed, so it doesn't have to consider it
+
+---
+
+# Head of xgsrc
+
+```plain
+100755 blob 7a5674987f5c46f6924d3f201bcc1eb2e82adb54	._Makefile
+100644 blob bd54374a29a5e6cf550146c97e1c30c29378ae88	.clang-format
+100644 blob 56b910bad88078fda616015d0a03efb74e5e8aa2	.editorconfig
+100644 blob 39eabfe4944e3a15be82b60eb69a2cab15116d4a	.gitignore
+100644 blob e39a18b0ab02c7b8245c172c13a7864ae18a1c39	.gitlab-ci.yml
+100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391	.gitmodules
+100644 blob df53de33dcb1acb20e7c38fc45acff14420fed5f	.pullapprove.yml
+040000 tree fc7f20aef3c5e77bef9d2c589cae301103609c2f	.vscode
+100755 blob 31a487408fef190cc150d387a7e36e2fe2d1364a	Makefile
+100644 blob b5a3a6ad5eb16b8e8a51daf99e7d309eed63e0de	README.md
+040000 tree d00babe4b75a1f97332e738946faf56d40b8c79a	archdoc
+040000 tree 042674448d9215be9c18464e1343206fd5886bf3	bald
+040000 tree d08d2774187ac8a722a1633d890d1df321f1fec7	clients
+100755 blob 0b103cf9a118f80130c16d6f10f314ba24ed22ec	compile_commands
+040000 tree 52612ba1eb8f6d7293ad99fb17aca5d38e251c8c	configfiles
+040000 tree ab9adbb1810c6806f2f26e28acfe8633c0e22d1d	docker
+100644 blob c80e4e4f0a45dbc81f8aa831e45630508a9518db	doxyconf
+040000 tree 937440171578882cc9d044a5a382274ce106ebc3	doxygen_output
+040000 tree c669705df8cef5480f461d46673cda120fa5b489	ext
+040000 tree f92e6f8b5ae2d035bf5148163a5a8cc353454217	gktester
+040000 tree 3e0041d735ec2bd0e6898d8d6cd7a69600fac6a4	int
+040000 tree 247b342dc1e6f65904c19bd25fd38cf8002aada6	kafkaConnector
+040000 tree 9fa19691ac5753f00a8e8a02ad31b07aacb1b7e4	libcmdcomp
+040000 tree 9c57a69352eb2ae7f1d7a6ea19db5a94df7b9d95	libconfigtool
+040000 tree 718636248972b8284bba189a58a140c2cf8a5bb7	libdatagen
+040000 tree 05a9a3b7e16eb3edce05caf2c2db02d02e21d54b	liberrorinjection
+```
 
 ---
 
@@ -515,7 +513,7 @@ bd2801d1ee5 (xeograph/db#candidate-142805950) HEAD@{17}: pull: Fast-forward
 # Getting back where you were
 
 ```console
-(master)$ git checkout -b oldstuff bd2801d1ee5 
+(master)$ git checkout -b oldstuff bd2801d1ee5
 Switched to a new branch 'oldstuff'
 (oldstuff)$
 ```
@@ -572,7 +570,7 @@ HEAD@{yesterday}, @{two weeks ago}, @{date}
 # git status
 
 ```console
-$ git status
+(working)$ git status
 On branch working
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
@@ -584,7 +582,7 @@ Untracked files:
         .gitignore
 
 no changes added to commit (use "git add" and/or "git commit -a")
- $
+(working)$
  ```
 
  ---
@@ -773,7 +771,7 @@ Merge made by the 'recursive' strategy.
 # git merge
 
 ```console
-(foo)$ git cat-file -p 0b27da1
+(master)$ git cat-file -p 0b27da1
 tree c3c6db2a545ee155449f3ce7747a3826876db335
 parent 490b213e2a672f2e254f41fc181bba5d84525263
 parent 43db10a4b8536eaf8c832b924e01d8ccb0384994
@@ -781,7 +779,7 @@ author Dave Boutcher <daveboutcher@gmail.com> 1590523394 -0500
 committer Dave Boutcher <daveboutcher@gmail.com> 1590523394 -0500
 
 Merge branch 'doc-updates'
-(foo)$
+(master)$
 ```
 
 ---
@@ -802,6 +800,7 @@ Don't actually do that unless you are insane
 When a one of the branches is already a parent of the other
 
 - i.e. no "fork"
+- no commit with two parents
 
 ---
 
@@ -849,6 +848,8 @@ int main(int argc, char **argv) {
    return 0;
 }
 ```
+
+Remember, you can configure your editor
 
 ---
 
@@ -1128,7 +1129,7 @@ Bisecting: 14 revisions left to test after this (roughly 4 steps)
 
 # Comparing branches
 
-git cherry compares commits in two branches by content, not sha
+```git cherry``` compares commits in two branches by content, not sha
 
 - if the same changes are in two branches *with different commit ids* they will not be shown
 
@@ -1177,6 +1178,7 @@ index 9461938..9384d5b 100644
 
 # Closing tips
 
+1. Read what git says
 1. Commit early, commit often
 1. Make backup branches before you do anything major!
 1. Clean up your commits before you put on a “public” branch
