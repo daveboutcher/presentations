@@ -7,26 +7,31 @@ style: |
     pre{color: black; background-color: lightgray;} 
     footer{color: black} 
     .hljs-meta { color: green}
+    header { position:absolute; left:90%; background-color: black}
+    header.image { color: black }
     section::after { color: black}
 ---
 
-# advanced git
+# becoming a git wizard
+![w:600](Ocient_logo_1333x304.png)
+
 
 ---
 <!-- These settings take effect for the remainder of the slides -->
+<!-- header: '![center](Ocient_symbol_75x75.png)' -->
 <!-- footer: 'advanced git' -->
 <!-- paginate: true -->
 
 # Deep git presentation
 
-![center](dilbert.png)
+![](xkcd-git.png)
 
 ---
 
 # what is git
 
 - Distributed revision control system with an emphasis on being fast
-- Every user has a full-fledged repository with complete history and full revision tracking
+- Every user has a full repository with complete history and full revision tracking
 - Not dependent on network access or a central server.
 
 ---
@@ -73,9 +78,11 @@ Initialized empty Git repository in /home/boutcher/world/.git/
 
 ```console
 
-(db)$
+(my-branch)$
 
 ```
+
+details depend on your environment....google is your friend
 
 ---
 
@@ -115,6 +122,12 @@ First version
 
 ---
 
+# Commit messages
+
+![](xkcd_git_commit.png)
+
+---
+
 # GUI vs command line
 
 In this talk I will be using the command line
@@ -123,7 +136,6 @@ There are GUI tools available for GIT like VSCode
 
 - Not as widely used as the command line
 - Generally can’t do everything the command line can
-- Someone else can do the VSCode GitLens talk
 
 ---
 
@@ -405,7 +417,7 @@ It can be clever:
 
 ---
 
-# Head of xgsrc
+# Head of ocient source
 
 ```plain
 100755 blob 7a5674987f5c46f6924d3f201bcc1eb2e82adb54	._Makefile
@@ -485,7 +497,7 @@ git reflog will show you a history of changes
 
 ---
 
-# My xgsrc reflog
+# My reflog
 
 ```console
 7fb3890e4f1 (HEAD -> db, xeograph/user/dboutcher/remove-r) HEAD@{0}: commit: Now actually remove R dependencies
@@ -564,6 +576,10 @@ HEAD@{yesterday}, @{two weeks ago}, @{date}
 
 (working)$ git show master^
 
+
+---
+
+![](ocient-branching.png)
 
 ---
 
@@ -742,7 +758,7 @@ Three ways to move changes between branches:
 # git merge
 
 ```console
-(master)$ git merge --no-ff doc-updates
+(master)$ git merge doc-updates
 Merge made by the 'recursive' strategy.
  doc/docs.md | 2 ++
  1 file changed, 2 insertions(+)
@@ -792,15 +808,6 @@ You can actually merge multiple branches at once
 - up to 16
 
 Don't actually do that unless you are insane
-
----
-
-# fast forward merge
-
-When a one of the branches is already a parent of the other
-
-- i.e. no "fork"
-- no commit with two parents
 
 ---
 
@@ -1182,3 +1189,9 @@ index 9461938..9384d5b 100644
 1. Commit early, commit often
 1. Make backup branches before you do anything major!
 1. Clean up your commits before you put on a “public” branch
+
+---
+
+# git
+
+![](file_extensions.png)
