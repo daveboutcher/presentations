@@ -486,6 +486,18 @@ https://node:9090/v1/loggers
 
 ---
 
+# Log Rate Limiting & Thresholding
+
+```C++
+// Limit rate at which logs are written
+LOG_RATE_LIMIT(...)
+
+// Set log level based on a value
+LOG_THRESHOLD(...)
+```
+
+---
+
 ## Things we do wrong...
 
 ```c++
@@ -601,10 +613,10 @@ http://ur-sql0:9090/v1/logcount?limit=3&level=info&prefix=t'
 
 ---
 
-## Current Hygene Work
+## Current Hygiene Work
 
 - Make it actually possible to log `INFO` and above to datadog
-- Fix logger names and scopes
+- Fix logger names and scopes everywhere
 
 Using Stefan's log reports
 
